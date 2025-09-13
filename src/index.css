@@ -1,15 +1,15 @@
-/* App.css */
-
-body {
+/* General Reset */
+* {
   margin: 0;
-  font-family: 'Arial', sans-serif;
-  background: #f9f9f9;
-  color: #333;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
-a {
-  text-decoration: none;
-  color: inherit;
+body {
+  background-color: #f4f6f8;
+  color: #333;
+  line-height: 1.6;
 }
 
 .app {
@@ -18,133 +18,348 @@ a {
   min-height: 100vh;
 }
 
+/* Header Styles */
 .header {
-  background: #2c3e50;
-  color: white;
-  padding: 1rem 2rem;
+  background-color: #1e2a38;
+  padding: 15px 30px;
   display: flex;
   align-items: center;
   justify-content: space-between;
+  color: white;
 }
 
-.logo {
+.logo-container {
+  display: flex;
+  align-items: center;
+}
+
+.logo-img {
+  width: 150px;
+  height: auto;
+  margin-right: 10px;
+}
+
+.logo-text {
   font-size: 1.5rem;
   font-weight: bold;
 }
 
 .nav ul {
-  list-style: none;
   display: flex;
-  gap: 1rem;
+  gap: 20px;
+  list-style: none;
 }
 
 .nav ul li a {
   color: white;
-  padding: 0.5rem 1rem;
+  text-decoration: none;
+  transition: color 0.3s ease;
 }
 
 .nav ul li a:hover {
-  background-color: #1abc9c;
-  border-radius: 4px;
+  color: #ffd700;
 }
 
+/* Main Content Styles */
 .main-content {
   flex: 1;
-  padding: 2rem;
+  padding: 20px;
 }
 
-.hero {
-  background: #ecf0f1;
+/* Footer Styles */
+.footer {
+  background-color: #1e2a38;
+  color: white;
   text-align: center;
-  padding: 4rem 2rem;
+  padding: 10px 0;
+}
+
+/* Hero Section */
+.hero {
+  background: linear-gradient(135deg, #4c6ef5, #15aabf);
+  color: white;
+  text-align: center;
+  padding: 60px 20px;
+  border-radius: 10px;
+  margin-bottom: 20px;
 }
 
 .hero h1 {
-  margin-bottom: 1rem;
+  font-size: 2.5rem;
+  margin-bottom: 15px;
+}
+
+.hero p {
+  font-size: 1.2rem;
+  margin-bottom: 20px;
 }
 
 .hero button {
-  background: #1abc9c;
-  color: white;
-  padding: 0.8rem 1.5rem;
+  background-color: #ffd700;
   border: none;
+  padding: 12px 25px;
   border-radius: 5px;
   cursor: pointer;
-  margin-top: 1rem;
+  font-weight: bold;
 }
 
 .hero button a {
-  color: white;
+  color: #1e2a38;
+  text-decoration: none;
 }
 
-.services .service-grid {
+.hero button:hover {
+  background-color: #ffc107;
+}
+
+/* Services */
+.services {
+  background-color: white;
+  padding: 20px;
+  border-radius: 10px;
+}
+
+.services h2 {
+  text-align: center;
+  margin-bottom: 20px;
+  color: #4c6ef5;
+}
+
+.service-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-  gap: 1.5rem;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 15px;
 }
 
 .service-card {
-  background: #fff;
-  padding: 1.5rem;
+  background-color: #f8f9fa;
+  padding: 15px;
   border-radius: 8px;
-  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.service-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.service-card h3 {
+  margin-bottom: 10px;
+  color: #1e2a38;
+}
+
+.service-card p {
+  font-size: 0.95rem;
+}
+
+/* About */
+.about {
+  background-color: white;
+  padding: 20px;
+  border-radius: 10px;
+}
+
+.about h2 {
+  text-align: center;
+  margin-bottom: 20px;
+  color: #4c6ef5;
+}
+
+.about-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 15px;
+}
+
+.about-img {
+  width: 100%;
+  max-width: 400px;
+  border-radius: 10px;
+}
+
+/* Testimonials */
+.testimonials {
+  background-color: white;
+  padding: 20px;
+  border-radius: 10px;
+}
+
+.testimonials h2 {
+  text-align: center;
+  margin-bottom: 20px;
+  color: #4c6ef5;
 }
 
 .testimonial-card {
-  background: #f1f1f1;
-  margin: 1rem 0;
-  padding: 1rem;
-  border-left: 4px solid #1abc9c;
+  display: flex;
+  gap: 15px;
+  background-color: #f8f9fa;
+  padding: 15px;
+  border-radius: 8px;
+  margin-bottom: 15px;
 }
 
-.testimonial-card blockquote {
-  margin: 0;
+.testimonial-img {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+}
+
+blockquote {
   font-style: italic;
+  margin-bottom: 5px;
+}
+
+.author {
+  font-size: 0.9rem;
+  color: #555;
+}
+
+/* Contact */
+.contact {
+  background-color: white;
+  padding: 20px;
+  border-radius: 10px;
+}
+
+.contact h2 {
+  text-align: center;
+  margin-bottom: 20px;
+  color: #4c6ef5;
 }
 
 .contact-list {
   list-style: none;
-  padding-left: 0;
+  line-height: 1.8;
 }
 
-.contact-list li {
-  margin-bottom: 0.8rem;
+/* Chat */
+.chat {
+  background-color: white;
+  padding: 20px;
+  border-radius: 10px;
 }
 
-.footer {
-  background: #2c3e50;
-  color: white;
+.chat h2 {
   text-align: center;
-  padding: 1.5rem 2rem;
+  margin-bottom: 20px;
+  color: #4c6ef5;
 }
+
+.chat-window {
+  max-height: 300px;
+  overflow-y: auto;
+  margin-bottom: 20px;
+  border: 1px solid #ddd;
+  padding: 10px;
+  border-radius: 5px;
+  background-color: #f8f9fa;
+}
+
+.chat-message {
+  margin-bottom: 10px;
+}
+
+.chat-message hr {
+  border: none;
+  border-top: 1px solid #ccc;
+}
+
+.chat-input-form {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.chat-input-form input,
+.chat-input-form textarea {
+  padding: 10px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  width: 100%;
+}
+
+.chat-input-form textarea {
+  resize: vertical;
+  min-height: 80px;
+}
+
+.chat-input-form button {
+  background-color: #4c6ef5;
+  color: white;
+  border: none;
+  padding: 12px;
+  border-radius: 5px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.chat-input-form button:hover {
+  background-color: #3b5bdb;
+}
+
+/* Login */
 .login {
   max-width: 400px;
   margin: 40px auto;
   padding: 20px;
+  background-color: white;
   border-radius: 10px;
-  background-color: #f2f2f2;
+}
+
+.login h2 {
   text-align: center;
+  margin-bottom: 20px;
+  color: #4c6ef5;
+}
+
+.login-form {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
 }
 
 .login-form input {
-  display: block;
-  width: 90%;
-  margin: 10px auto;
   padding: 10px;
   border-radius: 5px;
   border: 1px solid #ccc;
 }
 
 .login-form button {
-  background-color: #007bff;
+  background-color: #4c6ef5;
   color: white;
-  padding: 10px 20px;
   border: none;
+  padding: 12px;
   border-radius: 5px;
+  font-weight: bold;
   cursor: pointer;
+  transition: background-color 0.3s ease;
 }
 
-.login-form .error {
+.login-form button:hover {
+  background-color: #3b5bdb;
+}
+
+.error {
   color: red;
-  margin-top: 10px;
+  text-align: center;
+  font-size: 0.9rem;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .about-content {
+    flex-direction: column;
+  }
+
+  .nav ul {
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .service-grid {
+    grid-template-columns: 1fr;
+  }
 }

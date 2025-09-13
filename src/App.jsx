@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { BrowserRouter as Router, Routes, Route, Link, useNavigate } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route, Link, Navigate, useNavigate } from 'react-router-dom';
 import './App.css';
 
 // ---- Pages ----
@@ -100,9 +100,61 @@ const Contact = () => (
   </section>
 );
 
-// ---- Login Page ----
+const Chat = () => {
+  const [messages, setMessages] = useState([]);
+  const [name, setName] = useState('');
+  const [phone, setPhone] = useState('');
+  const [message, setMessage] = useState('');
 
-const Login = () => {
+  const sendMessage = () => {
+    if (name.trim() === '' || phone.trim() === '' || message.trim() === '') return;
+    const newMessage = {
+      name,
+      phone,
+      text: message,
+    };
+    setMessages([...messages, newMessage]);
+    setMessage('');
+  };
+
+  return (
+    <section className="chat">
+      <h2>Chat with STACKLY</h2>
+      <div className="chat-window">
+        {messages.map((msg, idx) => (
+          <div key={idx} className="chat-message">
+            <p><strong>Name:</strong> {msg.name}</p>
+            <p><strong>Phone:</strong> {msg.phone}</p>
+            <p><strong>Message:</strong> {msg.text}</p>
+            <hr />
+          </div>
+        ))}
+      </div>
+      <div className="chat-input-form">
+        <input
+          type="text"
+          placeholder="Name"
+          value={name}
+          onChange={(e) => setName(e.target.value)}
+        />
+        <input
+          type="text"
+          placeholder="Phone Number"
+          value={phone}
+          onChange={(e) => setPhone(e.target.value)}
+        />
+        <textarea
+          placeholder="Message"
+          value={message}
+          onChange={(e) => setMessage(e.target.value)}
+        />
+        <button onClick={sendMessage}>Send</button>
+      </div>
+    </section>
+  );
+};
+
+const Login = ({ setIsLoggedIn }) => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
@@ -110,9 +162,9 @@ const Login = () => {
 
   const handleLogin = (e) => {
     e.preventDefault();
-    // Dummy credentials for demo
-    if (username === 'admin' && password === 'stackly123') {
-      navigate('/');
+    if (username === 'pavangowda3344@gmail.com' && password === 'pavan1234') {
+      setIsLoggedIn(true);
+      navigate('/home');
     } else {
       setError('Invalid username or password.');
     }
@@ -143,47 +195,69 @@ const Login = () => {
   );
 };
 
-// ---- App Layout ----
+const ProtectedRoute = ({ isLoggedIn, children }) => {
+  if (!isLoggedIn) {
+    return <Navigate to="/" replace />;
+  }
+  return children;
+};
+
+const MainLayout = () => {
+  return (
+    <>
+      <header className="header">
+        <div className="logo-container">
+          <img
+            src="https://images.unsplash.com/photo-1504384308090-c894fdcc538d?auto=format&fit=crop&w=500&q=60"
+            alt="STACKLY Logo"
+            className="logo-img"
+          />
+          <span className="logo-text">STACKLY</span>
+        </div>
+        <nav className="nav">
+          <ul>
+            <li><Link to="/home">Home</Link></li>
+            <li><Link to="/services">Services</Link></li>
+            <li><Link to="/about">About</Link></li>
+            <li><Link to="/testimonials">Testimonials</Link></li>
+            <li><Link to="/contact">Contact</Link></li>
+            <li><Link to="/chat">Chat</Link></li>
+          </ul>
+        </nav>
+      </header>
+
+      <main className="main-content">
+        <Routes>
+          <Route path="/home" element={<Home />} />
+          <Route path="/services" element={<Services />} />
+          <Route path="/about" element={<About />} />
+          <Route path="/testimonials" element={<Testimonials />} />
+          <Route path="/contact" element={<Contact />} />
+          <Route path="/chat" element={<Chat />} />
+        </Routes>
+      </main>
+
+      <footer className="footer">
+        <p>&copy; {new Date().getFullYear()} STACKLY. All rights reserved.</p>
+      </footer>
+    </>
+  );
+};
 
 function App() {
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+
   return (
     <Router>
       <div className="app">
-        <header className="header">
-          <div className="logo-container">
-            <img
-              src="https://upload.wikimedia.org/wikipedia/commons/a/a7/React-icon.svg"
-              alt="STACKLY Logo"
-              className="logo-img"
-            />
-            <span className="logo-text">STACKLY</span>
-          </div>
-          <nav className="nav">
-            <ul>
-              <li><Link to="/">Home</Link></li>
-              <li><Link to="/services">Services</Link></li>
-              <li><Link to="/about">About</Link></li>
-              <li><Link to="/testimonials">Testimonials</Link></li>
-              <li><Link to="/contact">Contact</Link></li>
-              <li><Link to="/login">Login</Link></li>
-            </ul>
-          </nav>
-        </header>
-
-        <main className="main-content">
-          <Routes>
-            <Route path="/" element={<Home />} />
-            <Route path="/services" element={<Services />} />
-            <Route path="/about" element={<About />} />
-            <Route path="/testimonials" element={<Testimonials />} />
-            <Route path="/contact" element={<Contact />} />
-            <Route path="/login" element={<Login />} />
-          </Routes>
-        </main>
-
-        <footer className="footer">
-          <p>&copy; {new Date().getFullYear()} STACKLY. All rights reserved.</p>
-        </footer>
+        <Routes>
+          <Route path="/" element={<Login setIsLoggedIn={setIsLoggedIn} />} />
+          <Route path="/*" element={
+            <ProtectedRoute isLoggedIn={isLoggedIn}>
+              <MainLayout />
+            </ProtectedRoute>
+          } />
+        </Routes>
       </div>
     </Router>
   );
